@@ -10,7 +10,7 @@ import healthRoutes from './routes/health';
 import wechatRoutes from './routes/wechat';
 
 // 创建主应用
-const app = new Hono<{ Bindings: Env }>();
+const app = new Hono<{ Bindings: Env }>().basePath('/api');
 
 // ============================================
 // 全局中间件
