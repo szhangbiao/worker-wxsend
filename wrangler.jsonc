@@ -1,0 +1,13 @@
+/**
+ * Cloudflare Pages Configuration
+ * For more details: https://developers.cloudflare.com/pages/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "worker-wxsend",
+	"compatibility_date": "2025-12-13",
+	"pages_build_output_dir": "dist",
+	"observability": {
+		"enabled": true
+	}
+}
