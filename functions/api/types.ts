@@ -1,8 +1,9 @@
 // 环境变量类型定义
 export type Env = {
-    WECHAT_APP_ID?: string;
-    WECHAT_APP_SECRET?: string;
-    WECHAT_TEMPLATE_ID?: string;
+    WX_APPID?: string;
+    WX_SECRET?: string;
+    WX_USERID?: string;
+    WX_TEMPLATE_ID?: string;
     API_BASE_URL?: string;
     DEBUG?: string;
 };

@@ -2,9 +2,10 @@
 # 复制此文件为 .dev.vars 并填入真实的配置值
 
 # 微信测试号配置
-WECHAT_APP_ID=your_app_id_here
-WECHAT_APP_SECRET=your_app_secret_here
-WECHAT_TEMPLATE_ID=your_template_id_here
+WX_APPID=your_app_id_here
+WX_SECRET=your_app_secret_here
+WX_USERID=your_app_user_id_here
+WX_TEMPLATE_ID=your_template_id_here
 
 # API 配置
 API_BASE_URL=https://api.weixin.qq.com
