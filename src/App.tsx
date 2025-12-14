@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import './App.css';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
 
 function App() {
     const [message, setMessage] = useState('');
@@ -8,7 +10,6 @@ function App() {
 
     const handleSendMessage = async () => {
         if (!message.trim()) {
-            alert('请输入消息内容');
             return;
         }
 
@@ -16,7 +17,7 @@ function App() {
         setResponse('');
 
         try {
-            const res = await fetch('/api/wxsend', {
+            const res = await fetch('/api/wechat/send', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ function App() {
         setResponse('');
 
         try {
-            const res = await fetch('/api/hello');
+            const res = await fetch('/api/health'); // Updated path
             const data = await res.json();
             setResponse(JSON.stringify(data, null, 2));
         } catch (error) {
@@ -49,45 +50,73 @@ function App() {
     };
 
     return (
-        <div className="app">
-            <div className="container">
-                <h1>📱 微信消息发送</h1>
-                <p className="subtitle">基于 Cloudflare Pages + Hono 构建</p>
-
-                <div className="card">
-                    <h2>测试 API</h2>
-                    <button onClick={testHello} disabled={loading} className="btn-secondary">
-                        测试 /api/hello
-                    </button>
+        <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md mx-auto space-y-8">
+                <div className="text-center">
+                    <h1 className="text-3xl font-extrabold text-gray-900">📱 微信消息发送</h1>
+                    <p className="mt-2 text-sm text-gray-600">基于 Cloudflare Pages + Hono 构建</p>
                 </div>
 
-                <div className="card">
-                    <h2>发送微信消息</h2>
-                    <textarea
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="输入要发送的消息..."
-                        rows={4}
-                        disabled={loading}
-                    />
-                    <button onClick={handleSendMessage} disabled={loading} className="btn-primary">
-                        {loading ? '发送中...' : '发送消息'}
-                    </button>
-                </div>
+                <Card>
+                    <CardHeader>
+                        <CardTitle>测试 API</CardTitle>
+                        <CardDescription>检查后端服务是否正常</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <Button
+                            onClick={testHello}
+                            disabled={loading}
+                            variant="secondary"
+                            className="w-full"
+                        >
+                            测试 /api/health
+                        </Button>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>发送微信消息</CardTitle>
+                        <CardDescription>输入内容并发送到微信</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <Textarea
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="输入要发送的消息..."
+                            rows={4}
+                            disabled={loading}
+                        />
+                    </CardContent>
+                    <CardFooter>
+                        <Button
+                            onClick={handleSendMessage}
+                            disabled={loading}
+                            className="w-full"
+                        >
+                            {loading ? '发送中...' : '发送消息'}
+                        </Button>
+                    </CardFooter>
+                </Card>
 
                 {response && (
-                    <div className="card response">
-                        <h3>响应结果</h3>
-                        <pre>{response}</pre>
-                    </div>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>响应结果</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <pre className="bg-slate-100 p-4 rounded-md overflow-x-auto text-xs">
+                                {response}
+                            </pre>
+                        </CardContent>
+                    </Card>
                 )}
 
-                <div className="footer">
+                <footer className="text-center text-xs text-gray-500">
                     <p>
-                        🚀 前端: React + Vite | ⚡ 后端: Hono + Cloudflare Workers | 🌐 部署: Cloudflare
-                        Pages
+                        🚀 前端: React + Vite | ⚡ 后端: Hono + Cloudflare Workers | 🌐 部署: Cloudflare Pages
                     </p>
-                </div>
+                </footer>
             </div>
         </div>
     );
