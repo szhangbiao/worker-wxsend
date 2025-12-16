@@ -4,11 +4,11 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "concurrently \"npm run dev:start\" \"npm run pages:dev\"",
-		"dev:start": "vite",
+		"dev": "wrangler pages dev --proxy 5173 --port 8788",
+		"dev:frontend": "vite",
+		"dev:fullstack": "concurrently \"npm run dev:frontend\" \"wrangler pages dev --proxy 5173 --port 8788\"",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
-		"pages:dev": "wrangler pages dev --proxy 5173 --compatibility-date=2025-12-13",
 		"pages:deploy": "npm run build && wrangler pages deploy dist",
 		"test": "vitest",
 		"cf-typegen": "wrangler types"

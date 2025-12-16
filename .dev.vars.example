@@ -4,5 +4,3 @@
 # 微信测试号配置
 WX_APPID=your_app_id_here
 WX_SECRET=your_app_secret_here
-WX_USERID=your_app_user_id_here
-WX_TEMPLATE_ID=your_template_id_here

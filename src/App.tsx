@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 function App() {
-    const [message, setMessage] = useState('');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
     const [response, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleSendMessage = async () => {
-        if (!message.trim()) {
+        if (!title.trim() || !content.trim()) {
+            setResponse('错误: 标题和内容不能为空');
             return;
         }
 
@@ -17,12 +20,12 @@ function App() {
         setResponse('');
 
         try {
-            const res = await fetch('/api/wechat/send', {
+            const res = await fetch('/api/wechat/wxsend', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ title, content }),
             });
 
             const data = await res.json();
@@ -77,16 +80,34 @@ function App() {
                 <Card>
                     <CardHeader>
                         <CardTitle>发送微信消息</CardTitle>
-                        <CardDescription>输入内容并发送到微信</CardDescription>
+                        <CardDescription>输入标题和内容并发送到微信</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <Textarea
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            placeholder="输入要发送的消息..."
-                            rows={4}
-                            disabled={loading}
-                        />
+                        <div className="space-y-2">
+                            <label htmlFor="title" className="text-sm font-medium text-gray-700">
+                                标题
+                            </label>
+                            <Input
+                                id="title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder="输入消息标题..."
+                                disabled={loading}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="content" className="text-sm font-medium text-gray-700">
+                                内容
+                            </label>
+                            <Textarea
+                                id="content"
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
+                                placeholder="输入消息内容..."
+                                rows={4}
+                                disabled={loading}
+                            />
+                        </div>
                     </CardContent>
                     <CardFooter>
                         <Button

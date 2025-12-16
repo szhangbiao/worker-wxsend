@@ -1,15 +1,16 @@
 import { Hono } from 'hono';
 import type { Env } from '../types';
+import { errorResponse } from '../utils/response';
 import { WeChatAPI } from '../utils/wechat-api';
 
 const wechat = new Hono<{ Bindings: Env }>();
 
 /**
- * POST /api/wechat/send
+ * POST /api/wechat/wxsend
  * 发送微信模板消息
  * Body: { title: string, content: string }
  */
-wechat.post('/send', async (c) => {
+wechat.post('/wxsend', async (c) => {
     try {
         // 解析请求体
         const body = await c.req.json();
@@ -17,22 +18,12 @@ wechat.post('/send', async (c) => {
 
         // 参数验证
         if (!title || !content) {
-            return c.json({
-                success: false,
-                error: 'title and content are required',
-            }, 400);
+            return c.json(errorResponse('title and content are required'), 400);
         }
 
         // 获取环境变量
-        const userId = c.env.WX_USERID;
-        const templateId = c.env.WX_TEMPLATE_ID;
-
-        if (!userId || !templateId) {
-            return c.json({
-                success: false,
-                error: 'WX_USERID or WX_TEMPLATE_ID not configured',
-            }, 500);
-        }
+        const userId = 'ogGeC2PyZ7KsV9f8xams6eMxzx-c';
+        const templateId = 'jVLmwdkbnV0EBlfq0VBPBqiAu8ckSY92jIAFjuZ2ppk';
 
         // 创建微信 API 客户端
         const wechatAPI = new WeChatAPI(c.env);
@@ -49,19 +40,11 @@ wechat.post('/send', async (c) => {
 
         return c.json({
             success,
-            message: 'Template message sent successfully',
-            data: {
-                title,
-                content,
-                timestamp: new Date().toISOString(),
-            },
+            message: 'Template message sent successfully'
         });
     } catch (error) {
         console.error('Error sending WeChat message:', error);
-        return c.json({
-            success: false,
-            error: error instanceof Error ? error.message : 'Unknown error',
-        }, 500);
+        return c.json(errorResponse(error instanceof Error ? error.message : 'Unknown error'), 500);
     }
 });
 

@@ -40,4 +40,7 @@ app.notFound(notFoundHandler);
 // ============================================
 // 导出为 Pages Functions 处理器
 // ============================================
-export const onRequest = app.fetch;
+export const onRequest = async (context: any) => {
+    return app.fetch(context.request, context.env);
+};
+
