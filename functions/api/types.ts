@@ -4,8 +4,6 @@ export type Env = {
     WX_SECRET?: string;
     WX_USERID?: string;
     WX_TEMPLATE_ID?: string;
-    API_BASE_URL?: string;
-    DEBUG?: string;
 };
 
 // API 响应类型
