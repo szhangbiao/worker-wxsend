@@ -31,19 +31,6 @@ app.get('/', (c) => {
 // ============================================
 app.route('/health', healthRoutes);
 app.route('/wechat', wechatRoutes);
-
-// 兼容旧的 API 路径
-app.post('/wxsend', async (c) => {
-    // 重定向到新的路径
-    const body = await c.req.json();
-    const request = new Request(c.req.url.replace('/wxsend', '/wechat/send'), {
-        method: 'POST',
-        headers: c.req.raw.headers,
-        body: JSON.stringify(body),
-    });
-    return app.fetch(request, c.env);
-});
-
 // ============================================
 // 错误处理
 // ============================================

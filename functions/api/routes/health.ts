@@ -14,20 +14,4 @@ health.get('/', (c) => {
     });
 });
 
-/**
- * 配置信息端点
- */
-health.get('/config', (c) => {
-    const env = c.env;
-
-    return c.json({
-        success: true,
-        config: {
-            apiBaseUrl: env.API_BASE_URL || 'https://api.weixin.qq.com',
-            debug: env.DEBUG === 'true',
-            hasCredentials: !!(env.WECHAT_APP_ID && env.WECHAT_APP_SECRET),
-        },
-    });
-});
-
 export default health;
