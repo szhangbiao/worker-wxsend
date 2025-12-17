@@ -69,7 +69,7 @@ export class WeChatAPI {
         toUser: string;
         templateId: string;
         data: Record<string, { value: string }>;
-        page?: string;
+        url?: string;
     }): Promise<boolean> {
         const accessToken = await this.getStableToken();
         const url = `${this.baseUrl}/cgi-bin/message/template/send?access_token=${accessToken}`;
@@ -82,7 +82,7 @@ export class WeChatAPI {
             body: JSON.stringify({
                 touser: params.toUser,
                 template_id: params.templateId,
-                page: params.page,
+                url: params.url,
                 data: params.data,
             }),
         });

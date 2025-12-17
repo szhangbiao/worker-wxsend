@@ -22,7 +22,8 @@ wechat.post('/wxsend', async (c) => {
 
         // 获取环境变量
         const userId = 'ogGeC2PyZ7KsV9f8xams6eMxzx-c';
-        const templateId = 'jVLmwdkbnV0EBlfq0VBPBqiAu8ckSY92jIAFjuZ2ppk';
+        const templateId = '06InpBNLB8fqHDhox9dKJfZ7CynKIMqmfJmpCAOiGBI';
+        const priceUrl = 'https://price-pole.szhangbiao.cn';
 
         // 创建微信 API 客户端
         const wechatAPI = new WeChatAPI(c.env);
@@ -35,6 +36,7 @@ wechat.post('/wxsend', async (c) => {
                 title: { value: title },
                 content: { value: content },
             },
+            url: priceUrl
         });
 
         return c.json({
