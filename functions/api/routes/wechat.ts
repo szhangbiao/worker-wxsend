@@ -1,5 +1,4 @@
 import { Hono } from 'hono';
-import type { Env } from '../types';
 import { errorResponse } from '../utils/response';
 import { WeChatAPI } from '../utils/wechat-api';
 

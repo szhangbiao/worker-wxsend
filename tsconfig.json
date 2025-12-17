@@ -13,7 +13,6 @@
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		"types": [
-			"@cloudflare/workers-types",
 			"vite/client"
 		],
 		/* Emit */
@@ -38,7 +37,8 @@
 	},
 	"include": [
 		"src",
-		"functions"
+		"functions",
+		"worker-configuration.d.ts"
 	],
 	"exclude": [
 		"node_modules",

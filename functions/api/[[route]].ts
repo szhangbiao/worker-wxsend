@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { prettyJSON } from 'hono/pretty-json';
-import type { Env } from './types';
+
 import { errorHandler, notFoundHandler } from './middleware/error-handler';
 
 // 导入路由模块
