@@ -1,5 +1,4 @@
 import type { Context } from 'hono';
-import type { Env } from '../types';
 
 /**
  * 错误处理中间件

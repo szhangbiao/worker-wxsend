@@ -1,4 +1,3 @@
-import type { Env } from '../types';
 
 /**
  * 微信 API 客户端
