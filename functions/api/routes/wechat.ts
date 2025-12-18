@@ -49,4 +49,37 @@ wechat.post('/wxsend', async (c) => {
     }
 });
 
+
+wechat.post('/wxprice', async (c) => {
+    try {
+        // 解析请求体
+        const body = await c.req.json();
+        const { toUserId, templateId, templateData, url } = body;
+
+        // 参数验证
+        if (!toUserId || !templateId || !templateData) {
+            return c.json(errorResponse('toUser, templateId and templateData are required'), 400);
+        }
+
+        // 创建微信 API 客户端
+        const wechatAPI = new WeChatAPI(c.env);
+
+        // 发送模板消息
+        const success = await wechatAPI.sendTemplateMessage({
+            toUser: toUserId,
+            templateId: templateId,
+            data: templateData,
+            url: url
+        });
+
+        return c.json({
+            success,
+            message: 'Template message sent successfully'
+        });
+    } catch (error) {
+        console.error('Error sending WeChat message:', error);
+        return c.json(errorResponse(error instanceof Error ? error.message : 'Unknown error'), 500);
+    }
+});
+
 export default wechat;

@@ -12,7 +12,7 @@
 npm run dev
 ```
 
-- **访问地址**: `http://localhost:8788`
+- **访问地址**: `http://localhost:8787`
 - **特点**: Wrangler 会自动代理前端(5173)并处理后端 API
 - **优势**: 完全模拟生产环境,前端和后端在同一端口
 
@@ -26,7 +26,7 @@ npm run dev:frontend
 
 - **访问地址**: `http://localhost:5173`
 - **前提**: 需要先在另一个终端运行 `npm run dev` 启动后端
-- **特点**: Vite 会通过代理将 `/api` 请求转发到 `http://localhost:8788`
+- **特点**: Vite 会通过代理将 `/api` 请求转发到 `http://localhost:8787`
 
 ### 🔄 全栈并行模式
 
@@ -37,7 +37,7 @@ npm run dev:fullstack
 ```
 
 - **前端**: `http://localhost:5173`
-- **后端**: `http://localhost:8788`
+- **后端**: `http://localhost:8787`
 - **特点**: 两个端口都可以访问,灵活切换
 
 ## 生产环境
@@ -58,19 +58,19 @@ npm run pages:deploy
 
 ### Q: 我应该使用哪个开发模式?
 
-**A**: 推荐使用 `npm run dev`,访问 `http://localhost:8788`,这样最接近生产环境。
+**A**: 推荐使用 `npm run dev`,访问 `http://localhost:8787`,这样最接近生产环境。
 
 ### Q: 为什么有两个端口?
 
 **A**: 
 - `5173`: Vite 前端开发服务器
-- `8788`: Wrangler Pages Dev 服务器(代理前端 + 处理后端)
+- `8787`: Wrangler Pages Dev 服务器(代理前端 + 处理后端)
 
 ### Q: API 请求失败怎么办?
 
 **A**: 
 1. 确保使用 `npm run dev` 启动了 Wrangler
-2. 访问 `http://localhost:8788` 而不是 `5173`
+2. 访问 `http://localhost:8787` 而不是 `5173`
 3. 或者使用 `npm run dev:fullstack` 同时启动两个服务器
 
 ## 项目结构

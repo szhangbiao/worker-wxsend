@@ -22,7 +22,7 @@ export default defineConfig({
             // 将 /api 请求代理到 Wrangler Pages Dev 服务器
             // 这样在开发时访问 http://localhost:5173 也能正常调用 API
             '/api': {
-                target: 'http://localhost:8788',
+                target: 'http://localhost:8787',
                 changeOrigin: true,
             },
         },
