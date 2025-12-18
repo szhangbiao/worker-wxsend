@@ -22,7 +22,7 @@ wechat.post('/wxsend', async (c) => {
 
         // 获取环境变量
         const userId = 'ogGeC2PyZ7KsV9f8xams6eMxzx-c';
-        const templateId = '06InpBNLB8fqHDhox9dKJfZ7CynKIMqmfJmpCAOiGBI';
+        const templateId = 'e9awqnF0v2fkNVC25_kYLvQJNnaF0wCrisXMl892j6c';
         const priceUrl = 'https://price-pole.szhangbiao.cn';
 
         // 创建微信 API 客户端
@@ -57,8 +57,16 @@ wechat.post('/wxprice', async (c) => {
         const { toUserId, templateId, templateData, url } = body;
 
         // 参数验证
-        if (!toUserId || !templateId || !templateData) {
-            return c.json(errorResponse('toUser, templateId and templateData are required'), 400);
+        if (!toUserId) {
+            return c.json(errorResponse('toUserId are required'), 400);
+        }
+
+        if (!templateId) {
+            return c.json(errorResponse('templateId are required'), 400);
+        }
+
+        if (!templateData) {
+            return c.json(errorResponse('templateData are required'), 400);
         }
 
         // 创建微信 API 客户端
